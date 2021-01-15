@@ -2,6 +2,8 @@ import React from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
+import App from './App'
+import {Redirect} from 'react-router-dom'
 
 
 class Reg extends React.Component {
@@ -30,10 +32,6 @@ class Reg extends React.Component {
 
     }
 
-    closeAlert = (e) => {
-        this.setState({ visible: false })
-    }
-
     register = (e) => {
         // this.callAPI();
         e.preventDefault();
@@ -49,6 +47,7 @@ class Reg extends React.Component {
                 icon: 'success',
                 title: res.data,
               })
+              return<Redirect to="/"></Redirect>
         }
         else if(res.status==201){
             Swal.fire({
@@ -65,11 +64,6 @@ class Reg extends React.Component {
               })
         
         }
-            // alert(res.data)
-            // console.log(res.status)
-            // console.log(res.data)
-            this.setState({ alert: res.data.message })
-            this.setState({ visible: true })
         }).catch(err=>{
             console.log(err);
         })
@@ -80,7 +74,7 @@ class Reg extends React.Component {
 
 
     render() {
-        let show = this.state.visible ? "d-block" : "d-none";
+        // let show = this.state.visible ? "d-block" : "d-none";
         return (
             <div className="container">
                 {/* <div className="row">
@@ -97,8 +91,8 @@ class Reg extends React.Component {
                 </div> */}
                 <div className="row">
                     <div className="col-md-8 mx-auto">
-                        <h1 className="mt-4 text-center ">REGISTRATION</h1>
-                        <form className="pt-4" onSubmit={this.register}>
+                        {/* <h1 className="mt-2 text-center ">REGISTRATION</h1> */}
+                        <form className="pt-2" onSubmit={this.register}>
                             <div className='form-group'>
                                 <label for="email">Email    </label>
                                 <input className="form-control" type="email" name="mail" onChange={this.input} ></input>
@@ -112,19 +106,9 @@ class Reg extends React.Component {
                                 <input className="form-control" type="text" name="displayName" onChange={this.input}></input>
                             </div>
                             <div className='form-group pt-2'>
-                                <button className="btn btn-primary float-right pl-5 pr-5" >Register</button>
+                                <button className="btn  float-right pl-5 pr-5 mt-2" id="reg" >Register</button>
                             </div>
                         </form>
-                    </div>
-                </div>
-                <div className="row">
-                    <div className="col-md-6 pt-5 ">
-                        <ul class="list-group  ">
-                            <li class="list-group-item">{this.state.mail}</li>
-                            <li class="list-group-item">{this.state.password}</li>
-                            <li class="list-group-item">{this.state.displayName}</li>
-                            <li class="list-group-item">{this.state.api}</li>
-                        </ul>
                     </div>
                 </div>
             </div>

@@ -1,0 +1,7 @@
+.container login{
+    backdrop-filter: opacity(0.3);
+}
+
+#login{
+    background-color:rgb(53 185 137 ); 
+}

@@ -32,19 +32,17 @@ module.exports = {
                         {
                             $and:
                                 [
-                                    { mail: details.mail }, 
-                                    { password: details.password },
-                                    { displayname: details.displayname }
+                                    { mail: details.username }, 
+                                    { password: details.password }
                                 ]
                         }
                     }
                 ]
             ).toArray()
             if(data[0]){
-                console.log(data);
-                resolve("Login successfull")
+                resolve({status:true})
             }else{
-                resolve("invalid password or username")
+                resolve({status:false})
             }
         })
     }

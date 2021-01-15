@@ -32,15 +32,19 @@ router.post('/registration', function (req, res, next) {
 });
 
 router.post('/login', function (req, res, next) {
-  console.log(req.body)
-  userHelper.getUser(req.body).then((response) => {
-    console.log(response);
-    if (response) {
-      res.status(200).send({ message: response })
-    } else {
-      console.log("erorr");
-    }
-  });
+  if (req.body.username && req.body.password) {
+    userHelper.getUser(req.body).then((response) => {
+      if (response.status) {
+        res.status(200).json("Login successfull")
+      } else {
+        res.status(201).json("Invalid username or password")
+      }
+    });
+  }else{
+    res.status(202).json("please enter password and username")
+  }
+
+
 });
   
 
